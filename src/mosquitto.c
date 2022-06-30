@@ -31,6 +31,8 @@ Contributors:
 #include <process.h>
 #include <winsock2.h>
 #include <ws2tcpip.h>
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
 #endif
 
 #ifndef WIN32
@@ -164,7 +166,7 @@ static void mosquitto__daemonise(void)
 	assert(freopen("/dev/null", "w", stdout));
 	assert(freopen("/dev/null", "w", stderr));
 #else
-	log__printf(NULL, MOSQ_LOG_WARNING, "Warning: Can't start in daemon mode in Windows.");
+	ShowWindow(GetConsoleWindow(), SW_HIDE);
 #endif
 }
 
